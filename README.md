@@ -98,4 +98,6 @@ Developed on macOS 10.12 High Sierra, should be compatible with most Linux insta
 
 - Django 2.1.5 (installed with `conda`)
 
+- SQLite 3
+
 - GNU `make` and `bash` for running the `Makefile` recipes for easier app initialization and running
