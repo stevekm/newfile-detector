@@ -81,6 +81,16 @@ File files/file5.txt already in database: False
 Added file files/file5.txt to database
 ```
 
+You can check the contents of the database easily with a command like this:
+
+```
+$ sqlite3 db.sqlite3 'SELECT * FROM db_file'
+1|files/file1.txt|/Users/kellys04/projects/newfile-detector/files/file1.txt|2019-07-09 12:44:24.388268|2019-07-09 12:44:24.388290
+2|files/file2.txt|/Users/kellys04/projects/newfile-detector/files/file2.txt|2019-07-09 12:44:24.390758|2019-07-09 12:44:24.390777
+3|files/file3.txt|/Users/kellys04/projects/newfile-detector/files/file3.txt|2019-07-09 12:44:24.392343|2019-07-09 12:44:24.392360
+4|files/file4.txt|/Users/kellys04/projects/newfile-detector/files/file4.txt|2019-07-09 12:45:38.585296|2019-07-09 12:45:38.585318
+5|files/file5.txt|/Users/kellys04/projects/newfile-detector/files/file5.txt|2019-07-09 12:45:38.587730|2019-07-09 12:45:38.587748
+```
 
 # Application Structure
 
