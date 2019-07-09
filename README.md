@@ -1,39 +1,99 @@
-Django ORM Standalone Application
-=================================
+# newfile detector
 
-__Author__: masnun@gmail.com
+A basic demo app that demonstrates how to use a Django ORM Standalone Application to add new files to a database (SQLite).
+
+# Installation
+
+First, clone this repository:
+
+```
+git clone https://github.com/stevekm/newfile-detector.git
+cd newfile-detector
+```
+
+Setup a local `conda` installation to hold the Django library
+
+```
+make conda-install
+```
+
+- NOTE: configured for macOS and Linux
+
+Initialize the Django database
+
+```
+make init
+```
+
+- Run this every time changes are made to the database structure under `db/models.py`
+
+- the command `make reinit` can be used to erase the current database and start over from scratch
+
+You should also generate a new `SECRET_KEY` for your `settings.py`.
+
+If you do not wish to use a new `conda` installation as described, you can simply run the commands described in the `Makefile` with your pre-existing environment that includes a Django installation.
+
+# Usage
+
+Run the app with
+
+```
+make run
+```
+
+This will look inside the included `files` directory, and add listings for any files found to the database. Example:
+
+```
+$ make run
+python main.py
+Found files:
+['files/file1.txt', 'files/file2.txt', 'files/file3.txt']
+
+File files/file1.txt already in database: False
+Added file files/file1.txt to database
+File files/file2.txt already in database: False
+Added file files/file2.txt to database
+File files/file3.txt already in database: False
+Added file files/file3.txt to database
+```
+
+Upon adding more files to the `files` directory, they will be added to the database. However, old files will be skipped:
+
+```
+$ touch files/file4.txt
+$ touch files/file5.txt
+$ make run
+python main.py
+Found files:
+['files/file1.txt', 'files/file2.txt', 'files/file3.txt', 'files/file4.txt', 'files/file5.txt']
+
+File files/file1.txt already in database: True
+Did not add file files/file1.txt to database
+File files/file2.txt already in database: True
+Did not add file files/file2.txt to database
+File files/file3.txt already in database: True
+Did not add file files/file3.txt to database
+File files/file4.txt already in database: False
+Added file files/file4.txt to database
+File files/file5.txt already in database: False
+Added file files/file5.txt to database
+```
 
 
-Requirements
-------------
-This repository doesn't ship with a django installation. The system must have an
-existing django installation so that we can safely import required modules. A
-django app is absolutely not required. Among other requirements is the db
-backend. If you're planning to use mysql or pgsql - please make sure you have
-all dependencies met. This code works on Django 1.11.
+# Application Structure
 
+- `settings.py` - The Django settings module. Contains the database configuration in it. Modify this file to match your database credentials.
+- `manage.py` - Script for running Django projects.
+- `main.py` - Custom code and logic goes here.
 
-Application Structure
-----------------------
-+ __settings.py__ - The Django settings module. Contains the database configuration in it. Modify this file to match your database credentials.
-+ __manage.py__ - The famous manage.py script from django projects.
-+ __main.py__ - This where we write codes. This is just a sample file to demonstrate how to import models.
+- `db` - The database configuration directory, used by Django to manage the database, contains `models.py` which contains models that define the database schema and Python interface.
 
-+ __data__ - The data directory works as a django application and contains the models.py which is where you put your models according to django conventions
+# Software
 
-How to setup?
--------------
-+ git clone the source as a starting point
-+ Change to your project directory
-+ Create a new python3 virtualenv: `python3 -m venv .env`
-+ Activate the virtualenv: `source .env/bin/activate`
-+ Install Django: `pip install django`
+Developed on macOS 10.12 High Sierra, should be compatible with most Linux installations.
 
-How to use?
------------
-+ Generate a new `SECRET_KEY` for your settings.py.
-+ Modify settings.py to add your database connection parameters.
-+ Open "data/models.py". Modify existing model or add your own.
-+ Run `python manage.py makemigrations` to make migration scripts
-+ Run `python manage.py migrate` to create the tables and sync db changes. Feel free to use other manage.py commands available for django orm.
-+ Every time you make changes to models or change db parameters, don't forget to run the migrations.
+- Python 3 (installed with `conda`)
+
+- Django 2.1.5 (installed with `conda`)
+
+- GNU `make` and `bash` for running the `Makefile` recipes for easier app initialization and running
