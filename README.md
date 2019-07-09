@@ -2,6 +2,8 @@
 
 A basic demo app that demonstrates how to use a Django ORM Standalone Application to add new files to a database (SQLite).
 
+This app demonstrates how to use the Django ORM without a full Django app.
+
 # Installation
 
 First, clone this repository:
