@@ -2,3 +2,7 @@
 .vscode
 .env
 *.pyc
+conda/
+db.sqlite3
+__pycache__
+db/migrations/*

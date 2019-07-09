@@ -2,7 +2,6 @@ import os
 
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 
-# example) SQLite
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
@@ -10,20 +9,8 @@ DATABASES = {
     }
 }
 
-# example) MySQL
-# DATABASES = {
-#     'default': {
-#         'ENGINE': 'django.db.backends.mysql',
-#         'NAME': '',
-#         'USER': '',
-#         'PASSWORD': '',
-#         'HOST': '',
-#         'PORT': '',
-#     }
-# }
-
 INSTALLED_APPS = (
-    'data',
+    'db',
 )
 
 SECRET_KEY = 'REPLACE_ME'
